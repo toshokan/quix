@@ -1,0 +1,11 @@
+[package]
+name = "quix"
+version = "0.1.0"
+authors = ["toshokan <toshokan@shojigate.net>"]
+edition = "2018"
+
+[dependencies]
+clap = "2.32.0"
+handlebars = "1.1.0"
+serde = "1.0.84"
+serde_json = "1.0.35"
