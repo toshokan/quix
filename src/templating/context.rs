@@ -1,5 +1,7 @@
 use crate::templating::Variable;
-use std::collections::HashMap;
+use std::collections::BTreeMap;
+use std::convert::From;
+use serde::ser::{Serialize, Serializer, SerializeMap};
 
 pub struct Binding<'a> {
     variable: &'a Variable,
@@ -15,11 +17,40 @@ impl<'a> Binding<'a> {
         };
         Binding {
             variable,
-            value: new_value
+            value: new_value,
         }
+    }
+
+    pub fn name(&self) -> &str {
+        &self.variable.name
+    }
+
+    pub fn value(&self) -> &Option<String> {
+        &self.value
     }
 }
 
 pub struct Context<'a> {
-    bindings: HashMap<String, Binding<'a>>
+    bindings: BTreeMap<String, Binding<'a>>,
+}
+
+impl<'a> From<Vec<Binding<'a>>> for Context<'a> {
+    fn from(bindings: Vec<Binding<'a>>) -> Self {
+        let mut map = BTreeMap::new();
+        for binding in bindings {
+            map.insert(binding.name().to_owned(), binding);
+        }
+        Context { bindings: map }
+    }
+}
+
+impl<'a> Serialize for Context<'a> {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where S: Serializer {
+        let mut map = serializer.serialize_map(Some(self.bindings.len()))?;
+        for binding in self.bindings.values() {
+            map.serialize_entry(binding.name(), binding.value())?;
+        }
+        map.end()
+    }
 }

@@ -1,5 +1,7 @@
 mod error;
 pub mod context;
+pub mod worker;
+pub mod template;
 
 use std::fs;
 use std::io::Read;
