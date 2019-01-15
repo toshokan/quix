@@ -4,7 +4,6 @@ use std::io::Read;
 use std::fs;
 use std::path::{Path,PathBuf};
 
-
 #[derive(Deserialize)]
 pub struct QuixFile {
     pub template: Metadata,
