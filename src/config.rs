@@ -24,8 +24,8 @@ impl Config {
                  .takes_value(true))
             .get_matches();
 
-        let source = matches.value_of("source").map(|source_path| PathBuf::from(source_path));
-        let dest = matches.value_of("dest").map(|source_path| PathBuf::from(source_path));
+        let source = matches.value_of("source").map(PathBuf::from);
+        let dest = matches.value_of("dest").map(PathBuf::from);
 
         Ok(Config{
             source,
