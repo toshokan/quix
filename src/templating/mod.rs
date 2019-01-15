@@ -1,4 +1,5 @@
 mod error;
+pub mod context;
 
 use std::fs;
 use std::io::Read;
