@@ -1,5 +1,5 @@
 use std::fmt;
-use std::fmt::{Display, Debug};
+use std::fmt::{Debug, Display};
 
 #[derive(Debug)]
 pub enum Error {
@@ -9,10 +9,14 @@ pub enum Error {
 
 impl Display for Error {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "{}", match self {
-            Error::IOError(e) => format!("IOError: {}", e),
-            Error::BadFormat(e) => format!("BadFormat: {}", e)
-        })
+        write!(
+            f,
+            "{}",
+            match self {
+                Error::IOError(e) => format!("IOError: {}", e),
+                Error::BadFormat(e) => format!("BadFormat: {}", e),
+            }
+        )
     }
 }
 
