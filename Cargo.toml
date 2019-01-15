@@ -2,6 +2,7 @@
 name = "quix"
 version = "0.1.0"
 authors = ["toshokan <toshokan@shojigate.net>"]
+description = "a file and directory templating system"
 edition = "2018"
 
 [dependencies]
