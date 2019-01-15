@@ -41,5 +41,6 @@ pub struct Metadata {
 pub struct Variable {
     pub name: String,
     pub description: String,
+    #[serde(rename = "default")]
     pub default_value: Option<String>,
 }
