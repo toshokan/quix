@@ -1,16 +1,17 @@
 #[derive(Deserialize)]
 pub struct QuixFile {
-    template: Metadata,
-    variables: Vec<Variable>
+    pub template: Metadata,
+    pub variables: Vec<Variable>
 }
 
 #[derive(Deserialize)]
 pub struct Metadata {
+    pub name: String,
     pub author: String,
     pub description: String,
 }
 
-#[derive(Deserialize)]
+#[derive(Debug, Deserialize)]
 pub struct Variable {
     pub name: String,
     pub description: String,
