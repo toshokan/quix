@@ -1,7 +1,10 @@
+use crate::templating::QuixFile;
 use std::path;
 use std::path::PathBuf;
 
 pub struct Config {
+    pub quixfile: QuixFile,
+    pub quixfile_path: PathBuf,
     pub source: Option<PathBuf>,
     pub dest: Option<PathBuf>,
 }
@@ -31,6 +34,12 @@ impl Config {
         let source = matches.value_of("source").map(PathBuf::from);
         let dest = matches.value_of("dest").map(PathBuf::from);
 
-        Ok(Config { source, dest })
+        let mut quixfile_path = source.clone().unwrap();
+        quixfile_path.push("quix.json");
+        
+        let quixfile = QuixFile::open(&quixfile_path)
+            .map_err(|_| "failed to open quixfile")?;
+
+        Ok(Config { quixfile, quixfile_path, source, dest })
     }
 }
