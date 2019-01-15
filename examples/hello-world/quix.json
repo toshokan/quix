@@ -1,0 +1,14 @@
+{
+    "template": {
+	"name": "hello-world",
+	"author": "toshokan",
+	"description": "a simple 'hello world'-type template"
+    },
+    "variables": [
+	{
+	    "name": "name",
+	    "default": "toshokan",
+	    "description": "who are we saying hello to again?"
+	}
+    ]
+}
